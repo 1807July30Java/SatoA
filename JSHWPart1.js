@@ -23,7 +23,7 @@ homework.fibonacci = function(n){
  Don't use the Array sort() method... that would be lame.
 */
 homework.sort = function(array) {
-    
+
 };
 
 /*
@@ -34,7 +34,7 @@ homework.sort = function(array) {
  f(3) = 6
 */
 homework.factorial = function(n){
-
+    
 };
 
 /*
@@ -78,5 +78,38 @@ homework.rotateLeft = function(array, n) {
  Return false if not balanced
 */
 homework.balancedBrackets = function(bracketsString){
+    /*
+        Counts for each type of bracket
+        Add one for every opening, subtract 1 for each closing
+    */
+    var bracketC = 0;
+    var curlyC = 0;
+    var squareC = 0;
+    //assuming )( is not a balanced bracket set
+    var stringArr = bracketsString.split("");
+    for (var character in stringArr){
+        if(character==="("){
+            bracketC +=1;
+        } else if(character==="{"){
+            curlyC += 1;
+        } else if(character==="["){
+            squareC += 1;
+        } else if(character===")"){
+            bracketC -=1;
+        } else if(character==="}"){
+            curlyC -= 1;
+        } else if(character==="]"){
+            squareC -= 1;
+        }
+        if(bracketC<0||curlyC<0||squareC<0){
+            return false;
+        }
+    }
+    if(bracketC==0||curlyC==0||squareC==0){
+        return true;
+    } else {
+        return false;
+    }
+
 
 };
