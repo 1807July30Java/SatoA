@@ -87,29 +87,27 @@ homework.balancedBrackets = function(bracketsString){
     var squareC = 0;
     //assuming )( is not a balanced bracket set
     var stringArr = bracketsString.split("");
-    for (var character in stringArr){
-        if(character==="("){
-            bracketC +=1;
-        } else if(character==="{"){
-            curlyC += 1;
-        } else if(character==="["){
-            squareC += 1;
-        } else if(character===")"){
+    for (var i = 0; i< stringArr.length; i++){
+        if(stringArr[i]==="("){
+            bracketC = bracketC + 1;
+        } else if(stringArr[i]=="{"){
+            curlyC = curlyC + 1;
+        } else if(stringArr[i]=="["){
+            squareC = squareC + 1;
+        } else if(stringArr[i]==")"){
             bracketC -=1;
-        } else if(character==="}"){
+        } else if(stringArr[i]=="}"){
             curlyC -= 1;
-        } else if(character==="]"){
+        } else if(stringArr[i]=="]"){
             squareC -= 1;
         }
         if(bracketC<0||curlyC<0||squareC<0){
             return false;
         }
     }
-    if(bracketC==0||curlyC==0||squareC==0){
+    if(bracketC==0&&curlyC==0&&squareC==0){
         return true;
     } else {
         return false;
     }
-
-
 };
