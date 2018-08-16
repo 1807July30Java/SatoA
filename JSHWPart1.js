@@ -34,7 +34,19 @@ homework.sort = function(array) {
  f(3) = 6
 */
 homework.factorial = function(n){
-    
+    //start with edge cases
+    if(n<0){
+        return 0;
+    }
+    else if(n==0||n==1){
+        return 1;
+    } else {
+        var factoreal = 1;
+        for(var i=2;i<=n;i++){
+            factoreal = factoreal * i;
+        }
+        return factoreal;
+    }
 };
 
 /*
