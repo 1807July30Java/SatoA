@@ -23,7 +23,20 @@ homework.fibonacci = function(n){
  Don't use the Array sort() method... that would be lame.
 */
 homework.sort = function(array) {
-
+    var sorted = array;
+    var changed;
+    do{
+        changed = false;
+        for(var i = 1; i<sorted.length;i++){
+            if(sorted[i-1]>sorted[i]){
+                var mover = sorted[i];
+                sorted[i] = sorted[i-1];
+                sorted[i-1] = mover;
+                changed = true;
+            }
+        }
+    }while(changed);
+    return sorted;
 };
 
 /*
