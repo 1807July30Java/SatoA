@@ -122,5 +122,5 @@ testem.log
 #ignore target
 target/
 
-#ignore proporties file
-/src/main/resources/connection.properties
+#ignore proporties
+*.properties
