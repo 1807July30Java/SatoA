@@ -8,17 +8,21 @@ public class Employee {
 	private String emailAdd;
 	private int managerID;
 	private boolean isManager;
+	private String username;
+	private String password;
 	
 
 	/**
-	 * @param id - employee id
-	 * @param fName - first name
-	 * @param lName - last name
-	 * @param mailAdd - email address
-	 * @param manID - manager's id
-	 * @param isMan - is a manager of other employees 1 or a 0 but converted to boolean
+	 * @param id
+	 * @param fName
+	 * @param lName
+	 * @param mailAdd
+	 * @param manID
+	 * @param isMan
+	 * @param uname
+	 * @param pass
 	 */
-	public Employee(int id,String fName,String lName,String mailAdd, int manID, int isMan)
+	public Employee(int id,String fName,String lName,String mailAdd, int manID, int isMan,String uname,String pass)
 	{
 		super();
 		this.employeeID = id;
@@ -32,6 +36,8 @@ public class Employee {
 		} else {
 			this.isManager = false;
 		}
+		this.username = uname;
+		this.password = pass;
 	}
 	
 	//Getters and setters
@@ -68,5 +74,18 @@ public class Employee {
 	public void setManager(boolean isManager) {
 		this.isManager = isManager;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 }
