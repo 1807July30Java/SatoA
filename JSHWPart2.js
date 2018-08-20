@@ -83,7 +83,14 @@ Print the value of the attribute.
 Print the element that has the attribute.
 */
 var getCustomAttribute = function () {
-
+    var everything = document.getElementsByTagName("*");
+    for(var i=0;i<everything.length;i++){
+        for(var j=0;j<everything[i].attributes.length;j++){
+            if(everything[i].attributes[j].name=="data-customAttr"){
+                console.log(everything[i].attributes[j].value);
+            }
+        }
+    }
 };
 
 /*
@@ -99,7 +106,6 @@ Regarding these elements:
 
     <h3>Sum: span id="sum"></span></h3 >
 
-
         Define onchange event handler.
 
             Add < input > element values.
@@ -108,6 +114,20 @@ Put the sum in the < span > element.
 
 If values cannot be added, put "Cannot add" in the < span > element
 */
+
+var number1 = document.getElementById("num1");
+var number2 = document.getElementById("num2");
+var sum = document.getElementById("sum");
+var nummy1 = 0;
+var nummy2 = 0;
+number1.addEventListener("change",function(){
+    nummy1 = parseInt(number1.value);
+    sum.innerHTML = nummy1 + nummy2;
+});
+number2.addEventListener("change",function(){
+    nummy2 = parseInt(number2.value);
+    sum.innerHTML = nummy1 + nummy2;
+});
 
 
 
@@ -123,7 +143,10 @@ When user selects a skill, create an alert with a message similar to:
 NOTE: no alert should appear when user deselects a skill.
 */
 
-
+var skillOps = document.getElementsByTagName("skills");
+for(var c = 0;c<colorOps.length;c++){
+    skillOps[c].addEventListener("select",alert("Are you sure "+skillOps[c].value+"is one of your skills"));
+}
 
 
 /*
@@ -143,7 +166,10 @@ Make the background color(of all favoriteColor radio buttons)
 the newly selected favoriteColor
 */
 
-
+var colorOps = document.getElementsByTagName("colors");
+for(var c = 0;c<colorOps.length;c++){
+    colorOps[c].addEventListener("select",alert("Are you sure "+colorOps[c].value+"is your faveColor now?"));
+}
 
 
 /*
@@ -157,6 +183,16 @@ Hide the name if shown.
     Show the name if hidden.
 */
 
+var empNames = document.getElementsByClassName("empName");
+for (var d =0; d<empNames.length;d++){
+    empNames[d].addEventListener("mouseOver",function(){
+        if(empNames[d].style.display == "none"){
+            empNames[d].style.display = "block";
+        } else{
+            empNames[d].style.display = "none";
+        }
+    });
+}
 
 
 /*
