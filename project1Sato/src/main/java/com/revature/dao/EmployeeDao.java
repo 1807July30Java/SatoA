@@ -9,6 +9,9 @@ public interface EmployeeDao {
 	public Employee getEmployee(String user, String pass);
 	
 	public Employee addEmployee(Employee e);
-	public List<Employee> getAllEmployees(int employeeId);
+	
+	public List<Employee> getAllEmployees();
+	
+	public List<Employee> getAllEmployeesManaged(int employeeId);
 	
 }
