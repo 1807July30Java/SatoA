@@ -5,7 +5,7 @@ import com.revature.pojos.*;
 
 public interface RequestDao {
 	
-	public List<RRequest> getRequestsFromEmployee(int employeeID);
+	//public List<RRequest> getRequestsFromEmployee(int employeeID);
 	public List<RRequest> getRequestsFromEmployee(Employee e);
 	
 	public List<RRequest> getRequestsForManager(int managerID);
@@ -13,7 +13,9 @@ public interface RequestDao {
 	
 	public boolean submitRequest(RRequest req);
 	
-	public boolean updateRequest(int reqID);
+	//public boolean updateRequest(int reqID);
 	public boolean updateRequest(RRequest req);
+	
+	public List<RRequest> getResolvedRequests();
 	
 }
