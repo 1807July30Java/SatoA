@@ -143,11 +143,12 @@ When user selects a skill, create an alert with a message similar to:
 NOTE: no alert should appear when user deselects a skill.
 */
 
-var skillOps = document.getElementsByTagName("skills");
-for(var c = 0;c<colorOps.length;c++){
-    skillOps[c].addEventListener("select",alert("Are you sure "+skillOps[c].value+"is one of your skills"));
+var skills = document.getElementsByName("skills");
+for(let i=0;i<skills.length;i++){
+    skills.item(i).addEventListener("change",function(){
+        alert("Are you sure "+ skills[i].value +" is one of your skills");
+    });
 }
-
 
 /*
 8. Favorite Color Event
@@ -166,9 +167,11 @@ Make the background color(of all favoriteColor radio buttons)
 the newly selected favoriteColor
 */
 
-var colorOps = document.getElementsByTagName("colors");
-for(var c = 0;c<colorOps.length;c++){
-    colorOps[c].addEventListener("select",alert("Are you sure "+colorOps[c].value+"is your faveColor now?"));
+var selects = document.getElementsByName("favoriteColor");
+for (let i = 0; i < selects.length; i++) {
+    selects.item(i).addEventListener("change", function () {
+        alert("You like " + selects[i].value);
+    });
 }
 
 
@@ -183,13 +186,13 @@ Hide the name if shown.
     Show the name if hidden.
 */
 
-var empNames = document.getElementsByClassName("empName");
+var empNames = document.getElementsByName("empName");
 for (var d =0; d<empNames.length;d++){
     empNames[d].addEventListener("mouseOver",function(){
-        if(empNames[d].style.display == "none"){
-            empNames[d].style.display = "block";
-        } else{
+        if(empNames[d].style.display != "none"){
             empNames[d].style.display = "none";
+        } else{
+            empNames[d].style.display = "block";
         }
     });
 }
