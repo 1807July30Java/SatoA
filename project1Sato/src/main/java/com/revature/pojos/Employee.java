@@ -8,10 +8,7 @@ public class Employee {
 	private String emailAdd;
 	private int managerID;
 	private boolean isManager;
-	private String username;
-	private String password;
 	
-
 	/**
 	 * @param id
 	 * @param fName
@@ -22,7 +19,7 @@ public class Employee {
 	 * @param uname
 	 * @param pass
 	 */
-	public Employee(int id,String fName,String lName,String mailAdd, int manID, int isMan,String uname,String pass)
+	public Employee(int id,String fName,String lName,String mailAdd, int manID, int isMan)
 	{
 		super();
 		this.employeeID = id;
@@ -36,8 +33,6 @@ public class Employee {
 		} else {
 			this.isManager = false;
 		}
-		this.username = uname;
-		this.password = pass;
 	}
 	
 	//Getters and setters
@@ -75,16 +70,10 @@ public class Employee {
 		this.isManager = isManager;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	@Override
+	public String toString() {
+		return "Employee [employeeID=" + employeeID + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", emailAdd=" + emailAdd + ", managerID=" + managerID + ", isManager=" + isManager + "]";
 	}
 
 
