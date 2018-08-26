@@ -8,17 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.revature.dao.EmployeeDao;
+import com.revature.dao.EmployeeDaoImp;
+import com.revature.pojos.Employee;
 
 /**
- * Servlet implementation class dashManCardServlet
+ * Servlet implementation class AllEmployeesServlet
  */
-public class dashManCardServlet extends HttpServlet {
+public class AllEmployeesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dashManCardServlet() {
+    public AllEmployeesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,9 +32,15 @@ public class dashManCardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			response.setContentType("application/json");
-			String managedJSON= new Gson().toJson(session.getAttribute("managedJSON"));
-			response.getWriter().write(managedJSON);
+			Employee user = new Gson().fromJson((String) session.getAttribute("employeeJSON"), Employee.class);
+			if (user.isManager()) {
+				EmployeeDao ed = new EmployeeDaoImp();
+				response.setContentType("application/json");
+				String allEmpsJSON = new Gson().toJson(ed.getAllEmployees());
+				response.getWriter().write(allEmpsJSON);
+			} else {
+				response.getWriter().write("{null}");
+			}
 		} else {
 			response.setContentType("application/json");
 			response.getWriter().write("{null}");

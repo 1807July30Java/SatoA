@@ -29,17 +29,19 @@ function populatePage(xhr) {
 				for (let mc = 0; mc < managerCards.length; mc++) {
 					managerCards[mc].style.display = "inline";
 				}
-				sendAjaxGet("http://localhost:8084/project1Sato/dashManCard", populateManCard);
+				sendAjaxGet("http://localhost:8084/project1Sato/empsmanned", populateManCard);
 			}
 		}
 	} else {
 		window.location = "http://localhost:8084/project1Sato/login";
 	}
 };
+
 function populateManCard(xhr) {
 	console.log("Running populate man card")
 	if (xhr.responseText) {
-		var res = JSON.parse(JSON.parse(xhr.responseText));
+		console.log(xhr.responseText);
+		var res = JSON.parse(xhr.responseText);
 		var managedList = document.getElementById("employeesManaged");
 		if (res) {
 			for (let emp = 0; emp < res.length; emp++) {

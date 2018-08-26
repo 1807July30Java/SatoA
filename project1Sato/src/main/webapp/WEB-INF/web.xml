@@ -60,13 +60,31 @@
     <url-pattern>/dashReqCard</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>dashManCardServlet</display-name>
-    <servlet-name>dashManCardServlet</servlet-name>
-    <servlet-class>com.revature.servlet.dashManCardServlet</servlet-class>
+    <servlet-name>EmployeesManagedServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EmployeesManagedServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>dashManCardServlet</servlet-name>
-    <url-pattern>/dashManCard</url-pattern>
+    <servlet-name>EmployeesManagedServlet</servlet-name>
+    <url-pattern>/empsmanned</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeePageServlet</display-name>
+    <servlet-name>EmployeePageServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EmployeePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeePageServlet</servlet-name>
+    <url-pattern>/employees</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AllEmployeesServlet</display-name>
+    <servlet-name>AllEmployeesServlet</servlet-name>
+    <servlet-class>com.revature.servlet.AllEmployeesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllEmployeesServlet</servlet-name>
+    <url-pattern>/allemployees</url-pattern>
   </servlet-mapping>
 </web-app>

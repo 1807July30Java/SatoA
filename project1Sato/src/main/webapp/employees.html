@@ -1,13 +1,14 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
 
+<!-- MANAGER ONLY PAGE-->
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
-    <script src="script/main.js"></script>
+    <script src="script/emp.js"></script>
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
@@ -33,14 +34,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarText">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="dash">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Reimbursement Requests</a>
+                                <a class="nav-link" href="reimbursement">Reimbursement Requests</a>
                             </li>
-                            <li class="nav-item manager">
-                                <a class="nav-link" href="#">Employees</a>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="employees">Employees</a>
                             </li>
                             <!--add menu items if necessary-->
                         </ul>
@@ -54,80 +55,42 @@
         <!--CARDS-->
         <div class="row">
 
-            <div class="col-lg-3">
-                <div class="card bg-light">
-                    <div class="card-header">
-                        <i class="fas fa-user"></i>
-                        Your Info
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="profileId">Employee ID: 10</li>
-                        <li class="list-group-item" id="profileName">Bobby McBobface</li>
-                        <li class="list-group-item" id="profileEmail">yourmom@123.com</li>
-                    </ul>
-                    <div class="card-footer announcement-bottom">
-                        <a href="#">
-                            Edit Info
-                            <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-9" id="yourRequests">
-                <div class="card bg-light">
-                    <div class="card-header">
-                        <i class="fas fa-envelope"></i>
-                        Your Submitted Requests
-                    </div>
-                    <ul class="list-group list-group-flush" id="requests">
-                        <li class="list-group-item" id="profileId">Request#12223: Pants : Pending</li>
-                    </ul>
-                    <div class="card-footer announcement-bottom">
-                        <a href="#">
-                            More Details
-                            <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 manager">
-                <div class="card bg-light">
-                    <div class="card-header">
-                        <i class="fas fa-tasks"></i>
-                        Requests You Manage
-                    </div>
-
-                    <ul class="list-group list-group-flush" id="requestsManaged">
-                        <li class="list-group-item" >Employee ID: 10</li>
-                    </ul>
-
-                    <div class="card-footer announcement-bottom">
-                        <a href="#">
-                            edit info
-                            <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 manager">
+            <div class="col-lg-12">
                 <div class="card bg-light">
                     <div class="card-header">
                         <i class="fas fa-users"></i>
                         Employees You Manage
                     </div>
-                    <ul class="list-group list-group-flush" id="employeesManaged">
-                        <li class="list-group-item" id="">Employee ID: 10</li>
-                        <li class="list-group-item" id="">Bobby McBobface</li>
-                        <li class="list-group-item" id="">yourmom@123.com</li>
-                    </ul>
+                    <table class="table table-bordered mb-0" id="myEmployees">
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </table>
                     <div class="card-footer announcement-bottom">
                         <a href="#">
-                            edit info
+                            Recruit
                             <i class="fa fa-arrow-circle-right"></i>
                         </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="card bg-light">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        All Employees
+                    </div>
+                    <table class="table table-bordered mb-0" id="allEmployees">
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Manager</th>
+                            </tr>
+                    </table>
+                    <div class="card-footer announcement-bottom">
+
                     </div>
                 </div>
             </div>

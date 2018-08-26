@@ -60,10 +60,6 @@ public class LoginServlet extends HttpServlet {
 		if (e != null) {
 			// possibly send e as a json to session
 			session.setAttribute("employeeJSON", new Gson().toJson(e));
-			if(e.isManager()) {
-				EmployeeDao ed = new EmployeeDaoImp();
-				session.setAttribute("managedJSON", new Gson().toJson(ed.getAllEmployeesManaged(e)));
-			}
 			session.setAttribute("problem", null);
 			response.sendRedirect("dash");
 		} else {

@@ -20,7 +20,7 @@ public class EmployeeDaoImp implements EmployeeDao {
 		Employee dude = null;
 		PreparedStatement prepped = null;
 		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
-			String selectEmployee = "SELECT * FROM EMPLOYEE WHERE E_ID = ?";
+			String selectEmployee = "SELECT E.E_ID, E.F_NAME, E.L_NAME, E.EMAIL, E.SUPERIOR, M.F_NAME ||' ' || M.L_NAME AS MANAGER, E.IS_MANAGER FROM EMPLOYEE E FULL JOIN EMPLOYEE M ON E.SUPERIOR = M.E_ID WHERE E.E_ID = ?";
 			prepped = con.prepareStatement(selectEmployee);
 			prepped.setInt(1, employeeId);
 			ResultSet results = prepped.executeQuery();
@@ -30,8 +30,9 @@ public class EmployeeDaoImp implements EmployeeDao {
 				String lastName = results.getString("L_NAME");
 				String emailAdd = results.getString("EMAIL");
 				int managerId = results.getInt("SUPERIOR");
+				String managerName = results.getString("MANAGER");
 				int isManager = results.getInt("IS_MANAGER");
-				dude = new Employee(id, firstName, lastName, emailAdd, managerId, isManager);
+				dude = new Employee(id, firstName, lastName, emailAdd, managerId,managerName, isManager);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -56,7 +57,7 @@ public class EmployeeDaoImp implements EmployeeDao {
 	public List<Employee> getAllEmployees() {
 		List<Employee> allEmployees = new ArrayList<>();
 		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
-			String selectAllEmployees = "SELECT * FROM EMPLOYEE";
+			String selectAllEmployees = "SELECT E.E_ID, E.F_NAME, E.L_NAME, E.EMAIL, E.SUPERIOR, M.F_NAME ||' ' || M.L_NAME AS MANAGER, E.IS_MANAGER FROM EMPLOYEE E LEFT JOIN EMPLOYEE M ON E.SUPERIOR = M.E_ID";
 			Statement statement = con.createStatement();
 			ResultSet results = statement.executeQuery(selectAllEmployees);
 			while (results.next()) {
@@ -65,8 +66,9 @@ public class EmployeeDaoImp implements EmployeeDao {
 				String lastName = results.getString("L_NAME");
 				String emailAdd = results.getString("EMAIL");
 				int managerId = results.getInt("SUPERIOR");
+				String managerName = results.getString("MANAGER");
 				int isManager = results.getInt("IS_MANAGER");
-				allEmployees.add(new Employee(id, firstName, lastName, emailAdd, managerId, isManager));
+				allEmployees.add(new Employee(id, firstName, lastName, emailAdd, managerId,managerName, isManager));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -83,7 +85,7 @@ public class EmployeeDaoImp implements EmployeeDao {
 		List<Employee> employeesManaged = new ArrayList<>();
 		PreparedStatement prepped = null;
 		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
-			String selectEmployee = "SELECT * FROM EMPLOYEE WHERE SUPERIOR = ?";
+			String selectEmployee = "SELECT E.E_ID, E.F_NAME, E.L_NAME, E.EMAIL, E.SUPERIOR, M.F_NAME ||' ' || M.L_NAME AS MANAGER, E.IS_MANAGER FROM EMPLOYEE E FULL JOIN EMPLOYEE M ON E.SUPERIOR = M.E_ID WHERE E.SUPERIOR = ?";
 			prepped = con.prepareStatement(selectEmployee);
 			prepped.setInt(1, e.getEmployeeID());
 			ResultSet results = prepped.executeQuery();
@@ -93,8 +95,9 @@ public class EmployeeDaoImp implements EmployeeDao {
 				String lastName = results.getString("L_NAME");
 				String emailAdd = results.getString("EMAIL");
 				int managerId = results.getInt("SUPERIOR");
+				String managerName = results.getString("MANAGER");
 				int isManager = results.getInt("IS_MANAGER");
-				employeesManaged.add(new Employee(id, firstName, lastName, emailAdd, managerId, isManager));
+				employeesManaged.add(new Employee(id, firstName, lastName, emailAdd, managerId,managerName, isManager));
 			}
 			con.close();
 		} catch (SQLException e2) {

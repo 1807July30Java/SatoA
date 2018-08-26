@@ -7,6 +7,7 @@ public class Employee {
 	private String lastName;
 	private String emailAdd;
 	private int managerID;
+	private String managerName;
 	private boolean isManager;
 	
 	/**
@@ -19,7 +20,7 @@ public class Employee {
 	 * @param uname
 	 * @param pass
 	 */
-	public Employee(int id,String fName,String lName,String mailAdd, int manID, int isMan)
+	public Employee(int id,String fName,String lName,String mailAdd, int manID,String managerName, int isMan)
 	{
 		super();
 		this.employeeID = id;
@@ -27,6 +28,7 @@ public class Employee {
 		this.lastName = lName;
 		this.emailAdd = mailAdd;
 		this.managerID = manID;
+		this.managerName = managerName;
 		//isManager in SQL DB is either 1 or 0
 		if (isMan == 1) {
 			this.isManager = true;
@@ -74,6 +76,10 @@ public class Employee {
 	public String toString() {
 		return "Employee [employeeID=" + employeeID + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", emailAdd=" + emailAdd + ", managerID=" + managerID + ", isManager=" + isManager + "]";
+	}
+
+	public String getManagerName() {
+		return managerName;
 	}
 
 
