@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.pojos.Credentials;
+import com.google.gson.Gson;
+import com.revature.dao.EmployeeDao;
+import com.revature.dao.EmployeeDaoImp;
+import com.revature.pojos.Employee;
 import com.revature.service.AuthenticationService;
 
 /**
@@ -15,14 +18,16 @@ import com.revature.service.AuthenticationService;
  */
 public class LoginServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5998678913965369616L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public LoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -31,8 +36,12 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("login.html").forward(request, response);
+		HttpSession session = request.getSession(false);
+		if(session != null && session.getAttribute("employeeJSON")!=null) {
+			response.sendRedirect("dash");
+		} else {
+			request.getRequestDispatcher("login.html").forward(request, response);
+		}
 	}
 
 	/**
@@ -47,15 +56,19 @@ public class LoginServlet extends HttpServlet {
 		// grab params from request
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		Credentials cred = AuthenticationService.validUser(username, password);
-		if (cred != null) {
-			session.setAttribute("employeeID", cred.getEmployeeId());
+		Employee e = AuthenticationService.validUser(username, password);
+		if (e != null) {
+			// possibly send e as a json to session
+			session.setAttribute("employeeJSON", new Gson().toJson(e));
+			if(e.isManager()) {
+				EmployeeDao ed = new EmployeeDaoImp();
+				session.setAttribute("managedJSON", new Gson().toJson(ed.getAllEmployeesManaged(e)));
+			}
 			session.setAttribute("problem", null);
-			response.sendRedirect("home");
+			response.sendRedirect("dash");
 		} else {
 			session.setAttribute("problem", "incorrect password");
 			response.sendRedirect("login");
 		}
 	}
-
 }

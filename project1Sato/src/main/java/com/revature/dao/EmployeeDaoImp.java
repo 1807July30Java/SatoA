@@ -43,6 +43,11 @@ public class EmployeeDaoImp implements EmployeeDao {
 	}
 
 	@Override
+	public void recuiteEmployee(String email) {
+		// TODO Auto-generated method stub	
+	}
+	
+	@Override
 	public Employee addEmployee(Employee e) {
 		return null;
 	}
@@ -74,13 +79,13 @@ public class EmployeeDaoImp implements EmployeeDao {
 	}
 
 	@Override
-	public List<Employee> getAllEmployeesManaged(int employeeId) {
+	public List<Employee> getAllEmployeesManaged(Employee e) {
 		List<Employee> employeesManaged = new ArrayList<>();
 		PreparedStatement prepped = null;
 		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
 			String selectEmployee = "SELECT * FROM EMPLOYEE WHERE SUPERIOR = ?";
 			prepped = con.prepareStatement(selectEmployee);
-			prepped.setInt(1, employeeId);
+			prepped.setInt(1, e.getEmployeeID());
 			ResultSet results = prepped.executeQuery();
 			while (results.next()) {
 				int id = results.getInt("E_ID");
@@ -92,12 +97,14 @@ public class EmployeeDaoImp implements EmployeeDao {
 				employeesManaged.add(new Employee(id, firstName, lastName, emailAdd, managerId, isManager));
 			}
 			con.close();
-		} catch (SQLException e) {
+		} catch (SQLException e2) {
 			//do what
 		} catch (IOException e1) {
 			//do what
 		}
 		return employeesManaged;
 	}
+
+	
 
 }

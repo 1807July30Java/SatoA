@@ -25,4 +25,9 @@ public class Credentials {
 	public int getEmployeeId() {
 		return employeeId;
 	}
+
+	@Override
+	public String toString() {
+		return "Credentials [username=" + username + ", password=" + password + ", employeeId=" + employeeId + "]";
+	}
 }

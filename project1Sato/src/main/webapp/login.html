@@ -21,20 +21,20 @@
 <body>
     <!-- LOGIN FORM -->
     <div class="login-form">
-        <form>
+        <form action="login" method="post">
             <h2 class="text-center">Log in</h2>
             <div class="form-group">
                 <label for="inputEmail">Username</label>
-                <input type="username" class="form-control" id="inputUser" placeholder="Username">
+                <input name="username" class="form-control" id="inputUser" placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
             </div>
             <div class="checkbox">
                 <label><input type="checkbox"> Remember me</label>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" value="login"class="btn btn-primary">Login</button>
         </form>
     </div>
 </body>
