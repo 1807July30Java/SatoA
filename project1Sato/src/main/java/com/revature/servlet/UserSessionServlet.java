@@ -1,6 +1,7 @@
 package com.revature.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,19 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.revature.pojos.Employee;
 
 /**
- * Servlet implementation class dashReqCardServlet
+ * Servlet implementation class SessionServlet
+ * 
  */
-public class dashReqCardServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+public class UserSessionServlet extends HttpServlet {
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -720743516083268190L;
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
-    public dashReqCardServlet() {
+    public UserSessionServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -30,8 +36,8 @@ public class dashReqCardServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			response.setContentType("application/json");
-			String reqJSON= new Gson().toJson(session.getAttribute("requestJSON"));
-			response.getWriter().write(reqJSON);
+			String empJSON= new Gson().toJson(session.getAttribute("employeeJSON"));
+			response.getWriter().write(empJSON);
 		} else {
 			response.setContentType("application/json");
 			response.getWriter().write("{null}");
@@ -42,7 +48,6 @@ public class dashReqCardServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

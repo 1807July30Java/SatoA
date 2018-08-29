@@ -22,12 +22,12 @@
     <url-pattern>/dash</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>EmployeeInfoServlet</servlet-name>
-    <servlet-class>com.revature.servlet.EmployeeInfoServlet</servlet-class>
+    <servlet-name>UserSessionServlet</servlet-name>
+    <servlet-class>com.revature.servlet.UserSessionServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EmployeeInfoServlet</servlet-name>
-    <url-pattern>/empInfo</url-pattern>
+    <servlet-name>UserSessionServlet</servlet-name>
+    <url-pattern>/userinfo</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -60,14 +60,6 @@
     <url-pattern>/dashReqCard</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>EmployeesManagedServlet</servlet-name>
-    <servlet-class>com.revature.servlet.EmployeesManagedServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EmployeesManagedServlet</servlet-name>
-    <url-pattern>/empsmanned</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description></description>
     <display-name>EmployeePageServlet</display-name>
     <servlet-name>EmployeePageServlet</servlet-name>
@@ -79,12 +71,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AllEmployeesServlet</display-name>
-    <servlet-name>AllEmployeesServlet</servlet-name>
-    <servlet-class>com.revature.servlet.AllEmployeesServlet</servlet-class>
+    <display-name>InfoServlet</display-name>
+    <servlet-name>InfoServlet</servlet-name>
+    <servlet-class>com.revature.servlet.InfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AllEmployeesServlet</servlet-name>
-    <url-pattern>/allemployees</url-pattern>
+    <servlet-name>InfoServlet</servlet-name>
+    <url-pattern>/info</url-pattern>
   </servlet-mapping>
 </web-app>

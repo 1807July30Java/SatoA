@@ -2,24 +2,35 @@ package com.revature.pojos;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class RRequest {
 
 	private int requestID;
-	private int employeeID;
+	private int eID;
+	private String requester;
 	private Date requestDate;
 	private int approved;
 	private String description;
-	private Blob image;
+	private byte[] imageBlob;
+	private double amount;
 
-	public RRequest(int reqID, int empID, Date reqDate, int app, String desc, Blob img) {
+	public RRequest(int reqID, int empID, String reqster, Date reqDate, int app, String desc, Blob img, double amt) {
 		super();
 		this.requestID = reqID;
-		this.employeeID = empID;
+		this.eID = empID;
+		this.requester = reqster;
 		this.requestDate = reqDate;
 		this.approved = app;
 		this.description = desc;
-		this.image = img;
+		try {
+			this.imageBlob = img.getBytes(1, (int)img.length());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		this.amount = amt;
 	}
 	//getters and setters
 	public int getApprovalStatus() {
@@ -46,17 +57,34 @@ public class RRequest {
 	}
 
 	public int getEmployeeID() {
-		return employeeID;
+		return eID;
 	}
 
 	public Date getRequestDate() {
 		return requestDate;
 	}
-	public Blob getImage() {
-		return image;
+	public byte[] getImage() {
+		return imageBlob;
 	}
 	public void setImage(Blob image) {
-		this.image = image;
+		//this.imageBlob = image;
+	}
+	@Override
+	public String toString() {
+		return "RRequest [requestID=" + requestID + ", employeeID=" + eID + ", requestDate=" + requestDate
+				+ ", approved=" + approved + ", description=" + description + ", image=" + imageBlob + "]";
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getRequester() {
+		return requester;
+	}
+	public void setRequester(String requester) {
+		this.requester = requester;
 	}
 
 }

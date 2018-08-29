@@ -11,7 +11,7 @@ function sendAjaxGet(url, func) {
 };
 function populateEmployeeManagedTable(xhr) {
 	if (xhr.responseText) {
-		console.log(xhr.responseText);
+		//console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
 		var table = document.getElementById("myEmployees");
 		if (res) {
@@ -30,7 +30,7 @@ function populateEmployeeManagedTable(xhr) {
 };
 function populateEmployeeTable(xhr){
     if (xhr.responseText) {
-		console.log(xhr.responseText);
+		//console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
 		var table = document.getElementById("allEmployees");
 		if (res) {
@@ -41,7 +41,7 @@ function populateEmployeeTable(xhr){
                 let manager = row.insertCell(2);
                 name.innerHTML = res[emp].firstName + " " + res[emp].lastName;
                 email.innerHTML = res[emp].emailAdd;
-                console.log(res[emp].managerID);
+                //console.log(res[emp].managerID);
                 manager.innerHTML= res[emp].managerName;
                 row++;
 			}
@@ -52,6 +52,6 @@ function populateEmployeeTable(xhr){
 }
 
 window.onload = function () {
-    sendAjaxGet("http://localhost:8084/project1Sato/empsmanned", populateEmployeeManagedTable);
-    sendAjaxGet("http://localhost:8084/project1Sato/allemployees", populateEmployeeTable);
+    sendAjaxGet("http://localhost:8084/project1Sato/info?entity=employee&get=managed", populateEmployeeManagedTable);
+    sendAjaxGet("http://localhost:8084/project1Sato/info?entity=employee&get=all", populateEmployeeTable);
 }

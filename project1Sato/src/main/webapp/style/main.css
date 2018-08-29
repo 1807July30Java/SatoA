@@ -9,3 +9,13 @@ body{margin-top:20px;}
 .manager{
     display:none;
 }
+
+table{
+    width:inherit;
+}
+td{
+    word-break:break-all;
+}
+label{
+    display:block !important;
+}

@@ -107,7 +107,33 @@ public class EmployeeDaoImp implements EmployeeDao {
 		}
 		return employeesManaged;
 	}
-
+	@Override
+	public List<Employee> getAllEmployeesManaged(int eID) {
+		List<Employee> employeesManaged = new ArrayList<>();
+		PreparedStatement prepped = null;
+		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
+			String selectEmployee = "SELECT E.E_ID, E.F_NAME, E.L_NAME, E.EMAIL, E.SUPERIOR, M.F_NAME ||' ' || M.L_NAME AS MANAGER, E.IS_MANAGER FROM EMPLOYEE E FULL JOIN EMPLOYEE M ON E.SUPERIOR = M.E_ID WHERE E.SUPERIOR = ?";
+			prepped = con.prepareStatement(selectEmployee);
+			prepped.setInt(1, eID);
+			ResultSet results = prepped.executeQuery();
+			while (results.next()) {
+				int id = results.getInt("E_ID");
+				String firstName = results.getString("F_NAME");
+				String lastName = results.getString("L_NAME");
+				String emailAdd = results.getString("EMAIL");
+				int managerId = results.getInt("SUPERIOR");
+				String managerName = results.getString("MANAGER");
+				int isManager = results.getInt("IS_MANAGER");
+				employeesManaged.add(new Employee(id, firstName, lastName, emailAdd, managerId,managerName, isManager));
+			}
+			con.close();
+		} catch (SQLException e2) {
+			//do what
+		} catch (IOException e1) {
+			//do what
+		}
+		return employeesManaged;
+	}
 	
 
 }

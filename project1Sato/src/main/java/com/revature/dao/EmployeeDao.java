@@ -14,5 +14,6 @@ public interface EmployeeDao {
 	public List<Employee> getAllEmployees();
 	
 	public List<Employee> getAllEmployeesManaged(Employee e);
+	public List<Employee> getAllEmployeesManaged(int eID);
 	
 }

@@ -32,6 +32,7 @@ public class LogoutServlet extends HttpServlet {
 		request.getRequestDispatcher("base.html").include(request, response);
 		HttpSession session = request.getSession(false);
 		if (session != null) {
+			session.setAttribute("employeeJSON", null);
 			session.invalidate();
 		}
 		pw.print("you are successfully logged out");

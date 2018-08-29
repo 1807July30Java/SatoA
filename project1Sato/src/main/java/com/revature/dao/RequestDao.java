@@ -8,15 +8,18 @@ public interface RequestDao {
 	//public RRequest getRequest(int requestId);
 	
 	//public List<RRequest> getRequestsFromEmployee(int employeeID);
-	public List<RRequest> getRequestsFromEmployee(Employee e);
+	public List<RRequest> getRequestsFromEmployee(int eid);
 	
-	public List<RRequest> getRequestsForManager(Employee man);
+	public List<RRequest> getRequestsForManager(int eid);
 	
-	public boolean submitRequest(RRequest req);
+	public RRequest submitRequest(RRequest req);
 	
 	//public boolean updateRequest(int reqID);
-	public boolean updateRequest(RRequest req);
+	public boolean updateRequest(RRequest req1,RRequest req2);
 	
 	public List<RRequest> getResolvedRequests();
 	
+	public List<RRequest> getAllRequests();
+
+
 }
