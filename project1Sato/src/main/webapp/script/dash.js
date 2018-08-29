@@ -61,25 +61,22 @@ function populateReqCard(xhr) {
 		var requestCard = document.getElementById("requestsSubmittedCard");
 		if (res) {
 			for (let req = 0; req < res.length; req++) {
-				for (let emp = 0, row = 1; emp < res.length; emp++) {
-					let row = requestCard.insertRow();
-					let eyedee = row.insertCell(0);
-					let datey = row.insertCell(1);
-					let disc = row.insertCell(2);
-					let amt = row.insertCell(3);
-					let appr = row.insertCell(4);
-					eyedee.innerHTML = res[req].requestID;
-					datey.innerHTML = ""+ res[req].requestDate;
-					disc.innerHTML = ""+ res[req].description;
-					amt.innerHTML = res[req].amount;
-					if(res[req].approvalStatus==0){
-						appr.innerHTML = "Pending";
-					} else if (res[req].approvalStatus==1){
-						appr.innerHTML = "Approved";
-					} else if (res[req].approvalStatus==-1){
-						appr.innerHTML = "Denied";
-					}
-					row++
+				let row = requestCard.insertRow();
+				let eyedee = row.insertCell(0);
+				let datey = row.insertCell(1);
+				let disc = row.insertCell(2);
+				let amt = row.insertCell(3);
+				let appr = row.insertCell(4);
+				eyedee.innerHTML = res[req].requestID;
+				datey.innerHTML = "" + res[req].requestDate;
+				disc.innerHTML = "" + res[req].description;
+				amt.innerHTML = res[req].amount;
+				if (res[req].approvalStatus == 0) {
+					appr.innerHTML = "Pending";
+				} else if (res[req].approvalStatus == 1) {
+					appr.innerHTML = "Approved";
+				} else if (res[req].approvalStatus == -1) {
+					appr.innerHTML = "Denied";
 				}
 			}
 		}
@@ -91,17 +88,14 @@ function populateReqManagedCard(xhr) {
 		var requestCard = document.getElementById("requestsManagedCard");
 		if (res) {
 			for (let req = 0; req < res.length; req++) {
-				if(res[req].approvalStatus==0){
-					for (let emp = 0, row = 1; emp < res.length; emp++) {
+				if (res[req].approvalStatus == 0) {
 						let row = requestCard.insertRow();
 						let eyedee = row.insertCell(0);
 						let datey = row.insertCell(1);
 						let empeyedee = row.insertCell(2);
 						eyedee.innerHTML = res[req].requestID;
-						datey.innerHTML = ""+ res[req].requestDate;
-						empeyedee.innerHTML = ""+ res[req].requester;
-						row++
-					}
+						datey.innerHTML = "" + res[req].requestDate;
+						empeyedee.innerHTML = "" + res[req].requester;
 				}
 			}
 		}

@@ -32,6 +32,14 @@ public class RRequest {
 		
 		this.amount = amt;
 	}
+	public RRequest(int empID, Date reqDate, int app, String desc, double amt) {
+		super();
+		this.eID = empID;
+		this.requestDate = reqDate;
+		this.approved = app;
+		this.description = desc;
+		this.amount = amt;
+	}
 	//getters and setters
 	public int getApprovalStatus() {
 		return approved;

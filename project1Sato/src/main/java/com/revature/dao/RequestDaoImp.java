@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
@@ -82,32 +83,25 @@ public class RequestDaoImp implements RequestDao {
 	}
 
 
-	@Override
-	public RRequest submitRequest(RRequest req) {
-		RRequest theReq = null;
-		PreparedStatement prepped = null;
-		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
-			String selectReqs = "INSERT INTO REQUESTS(E_ID,REQ_DATE,APPROVED,REQ_DESC,IMAGE,AMOUNT) VALUES (?,?,?,?,?,?)";
-			prepped = con.prepareStatement(selectReqs);
-			prepped.setInt(1, req.getEmployeeID());
-			prepped.setDate(2, req.getRequestDate());
-			prepped.setInt(3, req.getApprovalStatus());
-			prepped.setString(4, req.getDescription());
-			prepped.setBytes(5, req.getImage());
-			prepped.setDouble(6, req.getAmount());
-			prepped.executeQuery();
-			con.close();
-		} catch (SQLException se) {
-			// do what
-		} catch (IOException e1) {
-			// do what
-		}
-		return theReq;
-	}
 
 	@Override
-	public boolean updateRequest(RRequest req1,RRequest req2) {
-		// TODO Auto-generated method stub
+	public boolean updateRequest(int requestID,int requestStatus) {
+		PreparedStatement prepped = null;
+		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
+			String updateRequest = "UPDATE REQUESTS SET APPROVED=? WHERE R_ID=?";
+			prepped = con.prepareStatement(updateRequest);
+			prepped.setInt(1, requestStatus);
+			prepped.setInt(2, requestID);
+			prepped.executeQuery();
+			con.close();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
@@ -141,7 +135,6 @@ public class RequestDaoImp implements RequestDao {
 	@Override
 	public List<RRequest> getAllRequests() {
 		List<RRequest> allRequests = new ArrayList<>();
-		PreparedStatement prepped = null;
 		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
 			String selectAllReqs = "SELECT R.R_ID, R.E_ID, R.REQ_DATE, R.APPROVED, R.REQ_DESC, R.IMAGE, R.AMOUNT, E.F_NAME ||' ' || E.L_NAME AS REQUESTER FROM REQUESTS R JOIN EMPLOYEE E ON R.E_ID = E.E_ID";
 			Statement statement = con.createStatement();
@@ -164,6 +157,50 @@ public class RequestDaoImp implements RequestDao {
 			// do what
 		}
 		return allRequests;
+	}
+
+	@Override
+	public RRequest submitRequestWithImage(RRequest req, InputStream blob) {
+		RRequest theReq = null;
+		PreparedStatement prepped = null;
+		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
+			String selectReqs = "INSERT INTO REQUESTS(E_ID,REQ_DATE,APPROVED,REQ_DESC,IMAGE,AMOUNT) VALUES (?,?,?,?,?,?)";
+			prepped = con.prepareStatement(selectReqs);
+			prepped.setInt(1, req.getEmployeeID());
+			prepped.setDate(2, req.getRequestDate());
+			prepped.setInt(3, req.getApprovalStatus());
+			prepped.setString(4, req.getDescription());
+			prepped.setBlob(5, blob);
+			prepped.setDouble(6, req.getAmount());
+			prepped.executeQuery();
+			con.close();
+		} catch (SQLException se) {
+			// do what
+		} catch (IOException e1) {
+			// do what
+		}
+		return theReq;
+	}
+	@Override
+	public RRequest submitRequest(RRequest req) {
+		RRequest theReq = null;
+		PreparedStatement prepped = null;
+		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
+			String selectReqs = "INSERT INTO REQUESTS(E_ID,REQ_DATE,APPROVED,REQ_DESC,AMOUNT) VALUES (?,?,?,?,?)";
+			prepped = con.prepareStatement(selectReqs);
+			prepped.setInt(1, req.getEmployeeID());
+			prepped.setDate(2, req.getRequestDate());
+			prepped.setInt(3, req.getApprovalStatus());
+			prepped.setString(4, req.getDescription());
+			prepped.setDouble(5, req.getAmount());
+			prepped.executeQuery();
+			con.close();
+		} catch (SQLException se) {
+			return theReq;
+		} catch (IOException e1) {
+			return theReq;
+		}
+		return theReq;
 	}
 
 }

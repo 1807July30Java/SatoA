@@ -79,4 +79,24 @@
     <servlet-name>InfoServlet</servlet-name>
     <url-pattern>/info</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewRequestServlet</display-name>
+    <servlet-name>NewRequestServlet</servlet-name>
+    <servlet-class>com.revature.servlet.NewRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewRequestServlet</servlet-name>
+    <url-pattern>/newReq</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveDenyServlet</display-name>
+    <servlet-name>ApproveDenyServlet</servlet-name>
+    <servlet-class>com.revature.servlet.ApproveDenyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveDenyServlet</servlet-name>
+    <url-pattern>/ads</url-pattern>
+  </servlet-mapping>
 </web-app>

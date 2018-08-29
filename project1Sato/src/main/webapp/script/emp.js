@@ -34,7 +34,7 @@ function populateEmployeeTable(xhr){
 		var res = JSON.parse(xhr.responseText);
 		var table = document.getElementById("allEmployees");
 		if (res) {
-			for (let emp = 0,row=1; emp < res.length; emp++) {
+			for (let emp = 0; emp < res.length; emp++) {
                 let row = table.insertRow();
                 let name = row.insertCell(0);
                 let email = row.insertCell(1);
@@ -43,7 +43,6 @@ function populateEmployeeTable(xhr){
                 email.innerHTML = res[emp].emailAdd;
                 //console.log(res[emp].managerID);
                 manager.innerHTML= res[emp].managerName;
-                row++;
 			}
 		}
 	} else {

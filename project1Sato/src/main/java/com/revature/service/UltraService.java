@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.io.InputStream;
 import java.util.List;
 
 import com.revature.dao.EmployeeDao;
@@ -30,5 +31,16 @@ public class UltraService {
 	}
 	public Employee getEmployee(int id) {
 		return ed.getEmployee(id);
+	}
+	
+	public RRequest sendRequest(RRequest req, InputStream blobby) {
+		if(blobby!=null) {
+			return rd.submitRequestWithImage(req, blobby);
+		} else {
+			return rd.submitRequest(req);
+		}
+	}
+	public boolean updateReq(int rid,int rstatus) {
+		return rd.updateRequest(rid, rstatus);
 	}
 }
