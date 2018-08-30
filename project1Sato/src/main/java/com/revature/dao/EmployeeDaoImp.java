@@ -134,6 +134,39 @@ public class EmployeeDaoImp implements EmployeeDao {
 		}
 		return employeesManaged;
 	}
+
+	@Override
+	public boolean updateEmployee(int employeeId, String param, String change) {
+		PreparedStatement prepped = null;
+		try (Connection con = ConnectionUtil.getConnection(propertiesFile)) {
+			String updateRequest = "";
+			if(param.equals("first")) {
+				updateRequest = "UPDATE EMPLOYEE SET F_NAME=? WHERE E_ID=?";
+			}
+			if (param.equals("last")) {
+				updateRequest = "UPDATE EMPLOYEE SET L_NAME=? WHERE E_ID=?";
+			}
+			if (param.equals("email")) {
+				updateRequest = "UPDATE EMPLOYEE SET EMAIL=? WHERE E_ID=?";
+			} 
+			if(updateRequest.equals("")) {
+				System.out.println("Nothing Submitted");
+				return false;
+			}
+			prepped = con.prepareStatement(updateRequest);
+			System.out.println("Changing " +param + " TO " + change);
+			prepped.setString(1, change);
+			prepped.setInt(2, employeeId);
+			prepped.executeQuery();
+			con.close();
+			return true;
+		} catch (SQLException e) {
+
+		} catch (IOException e) {
+			
+		}
+		return false;
+	}
 	
 
 }

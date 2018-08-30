@@ -16,4 +16,6 @@ public interface EmployeeDao {
 	public List<Employee> getAllEmployeesManaged(Employee e);
 	public List<Employee> getAllEmployeesManaged(int eID);
 	
+	public boolean updateEmployee(int employeeId,String param,String change);
+	
 }

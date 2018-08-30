@@ -89,13 +89,13 @@ function populateReqManagedCard(xhr) {
 		if (res) {
 			for (let req = 0; req < res.length; req++) {
 				if (res[req].approvalStatus == 0) {
-						let row = requestCard.insertRow();
-						let eyedee = row.insertCell(0);
-						let datey = row.insertCell(1);
-						let empeyedee = row.insertCell(2);
-						eyedee.innerHTML = res[req].requestID;
-						datey.innerHTML = "" + res[req].requestDate;
-						empeyedee.innerHTML = "" + res[req].requester;
+					let row = requestCard.insertRow();
+					let eyedee = row.insertCell(0);
+					let datey = row.insertCell(1);
+					let empeyedee = row.insertCell(2);
+					eyedee.innerHTML = res[req].requestID;
+					datey.innerHTML = "" + res[req].requestDate;
+					empeyedee.innerHTML = "" + res[req].requester;
 				}
 			}
 		}

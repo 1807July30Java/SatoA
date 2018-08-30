@@ -1,14 +1,13 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
 
-<!-- MANAGER ONLY PAGE-->
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Employees</title>
+    <title>Update User Info</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
-    <script src="script/emp.js"></script>
+    <script src="script/updatInfo.js"></script>
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
@@ -26,7 +25,7 @@
     <div id="page-wrapper" class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1><i class="far fa-user-circle"></i>Employees</h1>
+                <h1><i class="far fa-clipboard"></i>Update User Info</h1>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light breadcrumb">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -34,13 +33,13 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarText">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="dash">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="reimbursement">Reimbursement Requests</a>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item manager">
                                 <a class="nav-link" href="employees">Employees</a>
                             </li>
                             <!--add menu items if necessary-->
@@ -51,51 +50,36 @@
                     </div>
                 </nav>
             </div>
-        </div><!-- /.row -->
-        <!--CARDS-->
-        <div class="row">
+        </div>
+        <!-- FORM FOR NEW REQUEST-->
 
-            <div class="col-lg-12">
-                <div class="card bg-light">
-                    <div class="card-header">
-                        <i class="fas fa-users"></i>
-                        Employees You Manage
-                    </div>
-                    <table class="table table-bordered mb-0" id="myEmployees">
-                        <tr>
-                            <th>Full Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </table>
-                    <div class="card-footer announcement-bottom">
-                        <a href="#">
-                            Recruit
-                            <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
+        <div class="card bg-light">
+            <div class="card-header">
+                <i class="fas fa-envelope"></i>
+                Your Info
             </div>
-
-            <div class="col-lg-12">
-                <div class="card bg-light">
-                    <div class="card-header">
-                        <i class="fas fa-users"></i>
-                        All Employees
+            <div class="card-body">
+                <form action="updateinfo" method="POST">
+                    <div class="form-group">
+                        <label for="firstName">First Name </label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
                     </div>
-                    <table class="table table-bordered mb-0" id="allEmployees">
-                            <tr>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Manager</th>
-                            </tr>
-                    </table>
-                    <div class="card-footer announcement-bottom">
-
+                    <div class="form-group">
+                        <label for="lastName">Last Name </label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" required>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="email">Email </label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
+            <div class="card-footer announcement-bottom">
+                
+            </div>
+        </div>
 
-        </div><!-- /.row -->
     </div>
 </body>
 

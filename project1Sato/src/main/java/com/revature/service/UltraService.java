@@ -43,4 +43,8 @@ public class UltraService {
 	public boolean updateReq(int rid,int rstatus) {
 		return rd.updateRequest(rid, rstatus);
 	}
+	
+	public boolean updateEmp(int eid,String param,String change) {
+		return ed.updateEmployee(eid, param, change);
+	}
 }

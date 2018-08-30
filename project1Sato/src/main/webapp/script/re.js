@@ -42,6 +42,7 @@ function populateReqCard(xhr) {
 				let disc = row.insertCell(2);
 				let amt = row.insertCell(3);
 				let appr = row.insertCell(4);
+				let image = row.insertCell(5);
 				eyedee.innerHTML = res[req].requestID;
 				datey.innerHTML = "" + res[req].requestDate;
 				disc.innerHTML = "" + res[req].description;
@@ -52,6 +53,17 @@ function populateReqCard(xhr) {
 					appr.innerHTML = "Approved";
 				} else if (res[req].approvalStatus == -1) {
 					appr.innerHTML = "Denied";
+				}
+				let modal = document.getElementById('myModal');
+				let requestIMG = document.createElement("img");
+				let modalImg = document.getElementById("img01");
+				let captionText = document.getElementById("caption");
+				requestIMG.src = "data:image/jpg;base64," + res[req].image;
+				image.appendChild(requestIMG);
+				image.onclick = function () {
+					modal.style.display = "block";
+					modalImg.src = requestIMG.src;
+					captionText.innerHTML = res[req].description;
 				}
 			}
 		}
@@ -64,6 +76,7 @@ function populateReqManagedCard(xhr) {
 		if (res) {
 			for (let req = 0; req < res.length; req++) {
 				if (res[req].approvalStatus == 0) {
+					//ROW CREATION
 					let row = requestCard.insertRow();
 					let eyedee = row.insertCell(0);
 					let datey = row.insertCell(1);
@@ -73,16 +86,21 @@ function populateReqManagedCard(xhr) {
 					let empeyedee = row.insertCell(5);
 					let apButt = row.insertCell(6);
 					let dnButt = row.insertCell(7);
+					//row id is the request id:
 					row.setAttribute("id", res[req].requestID);
+
+					//FILL STATIC PARTS
 					eyedee.innerHTML = res[req].requestID;
 					datey.innerHTML = "" + res[req].requestDate;
 					disc.innerHTML = "" + res[req].description;
 					amt.innerHTML = res[req].amount;
 					empeyedee.innerHTML = "" + res[req].requester;
+
+					//BUTTONS for approving and denying
 					let approveButt = document.createElement("button");
 					let denyButt = document.createElement("button");
-					approveButt.onclick = function(){approve(res[req].requestID)};
-					denyButt.onclick = function(){deny(res[req].requestID)};
+					approveButt.onclick = function () { approve(res[req].requestID) };
+					denyButt.onclick = function () { deny(res[req].requestID) };
 					approveButt.classList.add("btn");
 					approveButt.classList.add("btn-success");
 					approveButt.innerHTML = "Approve";
@@ -91,6 +109,20 @@ function populateReqManagedCard(xhr) {
 					denyButt.innerHTML = "Deny";
 					apButt.appendChild(approveButt);
 					dnButt.appendChild(denyButt);
+
+					//IMAGES
+					let modal = document.getElementById('myModal');
+					let requestIMG = document.createElement("img");
+					let modalImg = document.getElementById("img01");
+					let captionText = document.getElementById("caption");
+					requestIMG.src = "data:image/jpg;base64," + res[req].image;
+					image.appendChild(requestIMG);
+					image.onclick = function () {
+						modal.style.display = "block";
+						modalImg.src = requestIMG.src;
+						captionText.innerHTML = res[req].description;
+					}
+
 				}
 			}
 		}
@@ -102,25 +134,24 @@ function populateAllCard(xhr) {
 		var requestCard = document.getElementById("allRequestsCard");
 		if (res) {
 			for (let req = 0; req < res.length; req++) {
-					let row = requestCard.insertRow();
-					let eyedee = row.insertCell(0);
-					let datey = row.insertCell(1);
-					let disc = row.insertCell(2);
-					let amt = row.insertCell(3);
-					let appr = row.insertCell(4);
-					let reqBy = row.insertCell(5);
-					eyedee.innerHTML = res[req].requestID;
-					datey.innerHTML = "" + res[req].requestDate;
-					disc.innerHTML = "" + res[req].description;
-					amt.innerHTML = res[req].amount;
-					if (res[req].approvalStatus == 0) {
-						appr.innerHTML = "Pending";
-					} else if (res[req].approvalStatus == 1) {
-						appr.innerHTML = "Approved";
-					} else if (res[req].approvalStatus == -1) {
-						appr.innerHTML = "Denied";
-					}
-					reqBy = res[req].requester;
+				let row = requestCard.insertRow();
+				let eyedee = row.insertCell(0);
+				let datey = row.insertCell(1);
+				let disc = row.insertCell(2);
+				let amt = row.insertCell(3);
+				let reqBy = row.insertCell(4);
+				eyedee.innerHTML = res[req].requestID;
+				datey.innerHTML = "" + res[req].requestDate;
+				disc.innerHTML = "" + res[req].description;
+				amt.innerHTML = res[req].amount;
+				if (res[req].approvalStatus == 0) {
+					appr.innerHTML = "Pending";
+				} else if (res[req].approvalStatus == 1) {
+					appr.innerHTML = "Approved";
+				} else if (res[req].approvalStatus == -1) {
+					appr.innerHTML = "Denied";
+				}
+				reqBy = res[req].requester;
 			}
 		}
 	}
@@ -140,4 +171,13 @@ function removeCard(xhr) {
 window.onload = function () {
 	sendAjaxGet("http://localhost:8084/project1Sato/userinfo", checkifManager);
 	sendAjaxGet("http://localhost:8084/project1Sato/info?entity=request&get=by", populateReqCard);
+
+	let modal = document.getElementById('myModal');
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
 };
