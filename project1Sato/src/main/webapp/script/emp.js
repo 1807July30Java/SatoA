@@ -25,7 +25,7 @@ function populateEmployeeManagedTable(xhr) {
 			}
 		}
 	} else {
-		window.location = "http://localhost:8084/project1Sato/dash";
+		window.location = "dash";
 	}
 };
 function populateEmployeeTable(xhr){
@@ -46,11 +46,11 @@ function populateEmployeeTable(xhr){
 			}
 		}
 	} else {
-		window.location = "http://localhost:8084/project1Sato/dash";
+		window.location = "dash";
 	}
 }
 
 window.onload = function () {
-    sendAjaxGet("http://localhost:8084/project1Sato/info?entity=employee&get=managed", populateEmployeeManagedTable);
-    sendAjaxGet("http://localhost:8084/project1Sato/info?entity=employee&get=all", populateEmployeeTable);
+    sendAjaxGet("info?entity=employee&get=managed", populateEmployeeManagedTable);
+    sendAjaxGet("info?entity=employee&get=all", populateEmployeeTable);
 }

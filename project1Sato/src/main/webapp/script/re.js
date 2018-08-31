@@ -21,12 +21,12 @@ function checkifManager(xhr) {
 				for (let mc = 0; mc < managerCards.length; mc++) {
 					managerCards[mc].style.display = "inline";
 				}
-				sendAjaxGet("http://localhost:8084/project1Sato/info?entity=request&get=for", populateReqManagedCard);
-				sendAjaxGet("http://localhost:8084/project1Sato/info?entity=request&get=all", populateAllCard);
+				sendAjaxGet("info?entity=request&get=for", populateReqManagedCard);
+				sendAjaxGet("info?entity=request&get=all", populateAllCard);
 			}
 		}
 	} else {
-		window.location = "http://localhost:8084/project1Sato/login";
+		window.location = "login";
 	}
 };
 
@@ -144,23 +144,16 @@ function populateAllCard(xhr) {
 				datey.innerHTML = "" + res[req].requestDate;
 				disc.innerHTML = "" + res[req].description;
 				amt.innerHTML = res[req].amount;
-				if (res[req].approvalStatus == 0) {
-					appr.innerHTML = "Pending";
-				} else if (res[req].approvalStatus == 1) {
-					appr.innerHTML = "Approved";
-				} else if (res[req].approvalStatus == -1) {
-					appr.innerHTML = "Denied";
-				}
 				reqBy = res[req].requester;
 			}
 		}
 	}
 };
 function approve(requestID) {
-	sendAjaxGet("http://localhost:8084/project1Sato/ads?rid=" + requestID + "&status=1", removeCard);
+	sendAjaxGet("ads?rid=" + requestID + "&status=1", removeCard);
 }
 function deny(requestID) {
-	sendAjaxGet("http://localhost:8084/project1Sato/ads?rid=" + requestID + "&status=-1", removeCard);
+	sendAjaxGet("ads?rid=" + requestID + "&status=-1", removeCard);
 }
 function removeCard(xhr) {
 	var row = document.getElementById(xhr.responseText);
@@ -169,8 +162,8 @@ function removeCard(xhr) {
 
 
 window.onload = function () {
-	sendAjaxGet("http://localhost:8084/project1Sato/userinfo", checkifManager);
-	sendAjaxGet("http://localhost:8084/project1Sato/info?entity=request&get=by", populateReqCard);
+	sendAjaxGet("userinfo", checkifManager);
+	sendAjaxGet("info?entity=request&get=by", populateReqCard);
 
 	let modal = document.getElementById('myModal');
 	// Get the <span> element that closes the modal

@@ -30,9 +30,9 @@ function checkifManager(xhr) {
             emailInput.value = res.emailAdd;
 		}
 	} else {
-		window.location = "http://localhost:8084/project1Sato/login";
+		window.location = "login";
 	}
 };
 window.onload = function () {
-	sendAjaxGet("http://localhost:8084/project1Sato/userinfo", checkifManager);
+	sendAjaxGet("userinfo", checkifManager);
 };

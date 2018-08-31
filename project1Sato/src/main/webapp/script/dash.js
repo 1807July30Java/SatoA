@@ -29,8 +29,8 @@ function populatePage(xhr) {
 				for (let mc = 0; mc < managerCards.length; mc++) {
 					managerCards[mc].style.display = "inline";
 				}
-				sendAjaxGet("http://localhost:8084/project1Sato/info?entity=employee&get=managed", populateManCard);
-				sendAjaxGet("http://localhost:8084/project1Sato/info?entity=request&get=for", populateReqManagedCard);
+				sendAjaxGet("info?entity=employee&get=managed", populateManCard);
+				sendAjaxGet("info?entity=request&get=for", populateReqManagedCard);
 			}
 		}
 	} else {
@@ -102,6 +102,6 @@ function populateReqManagedCard(xhr) {
 	}
 };
 window.onload = function () {
-	sendAjaxGet("http://localhost:8084/project1Sato/userinfo", populatePage);
-	sendAjaxGet("http://localhost:8084/project1Sato/info?entity=request&get=by", populateReqCard);
+	sendAjaxGet("userinfo", populatePage);
+	sendAjaxGet("info?entity=request&get=by", populateReqCard);
 };
